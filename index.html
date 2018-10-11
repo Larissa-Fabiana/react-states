@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>React: Getting Started</title>
+    <!-- importamos alguns estilos -->
+    <!-- TODO: link base.css -->
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://unpkg.com/react@15/dist/react.js"></script>
+    <script src="https://unpkg.com/react-dom@15/dist/react-dom.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.24/browser.min.js"></script>
+
+  </head>
+  <body>
+  <div id="container">
+
+  </div>
+
+  <script type="text/babel">
+
+    // function MyComponent(props) {
+    //   return(
+    //     <div>
+    //       <h1>{props.text}</h1>
+    //       <h2>{props.subtext}</h2>
+    //     </div>
+    //   );
+    // }
+
+    // var x = {
+    //   numero: 2,
+    //   numero2: 4,
+    //   soma: function(){
+    //     return this.numero + this.numero2
+    //   }
+    // }
+
+    // class MyComponent2 extends React.Component {
+    //   // constructor(){
+    //   //   super(props);
+    //   // }
+    //   render() {
+    //     return(
+    //     <div>
+    //       <h1>{this.props.text}</h1>
+    //       <h2>{this.props.subtext}</h2>
+    //     </div>
+    //     )
+    //   }
+    // }
+
+    // ReactDOM.render(
+    //   <div>
+    //     <MyComponent text='cafe' subtext='com leite'/> 
+    //     <MyComponent2 text='leite' subtext='com nescau'/>
+    //   </div>, 
+    //   document.getElementById('container')
+    // )
+ 
+    class ComponentWithChildren extends React.Component {
+
+      constructor(props){
+        super(props);
+        this.state = {color: 'red'};
+
+        setInterval(this.changeColor.bind(this), props.frequency);  
+      }
+
+        changeColor() {
+          var obj = this;
+          var currentColor = obj.state.color;
+          if(currentColor === 'red'){
+            obj.setState({color: 'blue'})
+          }else{
+            obj.setState({color: 'red'})
+          }
+        }
+      
+      render(){
+        return(
+          <div>
+            <hr/>
+            <h1>
+              Header
+            </h1>
+            <hr/>
+            {this.props.children}
+            <hr />
+            <div style={{backgroundColor: this.state.color }}>a</div>
+          </div>
+        )
+      }
+    }
+
+
+    ReactDOM.render(
+      
+      <ComponentWithChildren frequency='1000'>
+        <p>legal</p><ul><li>item 1</li></ul>
+      <ComponentWithChildren frequency='2000'>
+        <p>legal</p><ul><li>item 1</li></ul>
+      </ComponentWithChildren>
+    </ComponentWithChildren>
+      
+      , 
+      document.getElementById('container')
+    );
+
+    // class MyHello extends React.Component {
+      
+    //   constructor(props) {
+    //     super(props);
+    //     this.setOther = this.setOther.bind(this);
+    //     this.state = {};
+    //   }
+
+    //   setOther(){
+    //     this.setState({otherName: "Michael"});
+    //   }
+
+    //   render() {
+        
+    //     return (
+    //       <div>
+    //         <h1>Hello {this.props.name}</h1>
+    //         {this.props.children}
+    //         <button onClick={this.setOther}>Click ME</button>
+    //         {this.state.otherName &&
+    //           <h2>{this.state.otherName}</h2>
+    //         }
+    //       </div>
+    //     )
+    //   }    
+    // }
+
+    // const comp = (
+    //   <MyHello name='John'>
+    //     <h4>Vai!!!</h4>
+    //   </MyHello>
+    // )
+
+    // ReactDOM.render(
+    //   comp, 
+    //   document.getElementById('container')
+    // );
+
+  </script>
+
+  </body>
+</html>
